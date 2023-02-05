@@ -4,12 +4,14 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
+import org.hibernate.annotations.DynamicUpdate;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
 @Entity
+@DynamicUpdate
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,6 +19,8 @@ public class Product {
 
     @NotEmpty(message = "Tittle should not be empty")
     private String title;
+
+    private Long categoryId;
 
     @NotEmpty(message = "please select a category")
     private String category;
@@ -36,7 +40,10 @@ public class Product {
     private String description;
 
 
-    private String imageUrl;
+    private String imageName1;
+    private String imageName2;
+    private String imageName3;
+    private String imageName4;
 
     @NotEmpty(message = "Weight should not be empty")
     private String weight;
@@ -52,14 +59,11 @@ public class Product {
     private LocalDateTime mtime;
 
 
-    private int viewTimes = 0;
-    private int addToCarTimes = 0;
-    private int volume = 0;
-    private int avgRating = 5;
+    private int viewTimes;
+    private int addToCarTimes;
+    private int volume;
+    private int avgRating;
 
-    private String imageUrl1;
-    private String imageUrl2;
-    private String imageUrl3;
 
     public float getCurrentPrice() {
         return this.price * this.discount/10;

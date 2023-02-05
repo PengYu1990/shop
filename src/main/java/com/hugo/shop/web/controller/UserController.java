@@ -31,9 +31,9 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public String login(User user) {
-        User loginUser = userService.login(user);
-        if(loginUser != null && loginUser.getId() != null && loginUser.getPassword().equals(user.getPassword())) {
+    public String login(String username, String password) {
+        User loginUser = userService.login(username, password);
+        if(loginUser != null ) {
             System.out.printf("登录成功"+loginUser.toString());
         } else {
             System.out.printf("登录失败");

@@ -19,8 +19,8 @@ public class UserDataLoader implements ApplicationRunner {
     public void run(ApplicationArguments args) throws Exception {
         if(userRepository.count() == 0) {
             List<User> users = List.of(
-                    new User(null, "ypydd", "qqdfa", "Peng", "Yu", LocalDate.of(1989, 12, 5), "yp1990@gmail.com"),
-                    new User(null, "ppkd", "sdf", "Hugo", "Yu", LocalDate.of(1999, 12, 5), "ddsdf@dail.com")
+//                    new User(null, "ypydd", "qqdfa", "Peng", "Yu", LocalDate.of(1989, 12, 5), "yp1990@gmail.com"),
+//                    new User(null, "ppkd", "sdf", "Hugo", "Yu", LocalDate.of(1999, 12, 5), "ddsdf@dail.com")
 
             );
             userRepository.saveAll(users);

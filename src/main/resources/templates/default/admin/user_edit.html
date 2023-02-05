@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="">
+    <title>Looki - Edit User</title>
+    <!-- Favicon -->
+
+
+    <!--********************************** 
+        all css files 
+    *************************************-->
+
+    <!--*************************************************** 
+       fontawesome,bootstrap,plugins and main style css
+     ***************************************************-->
+    <!-- cdn links -->
+
+    <link rel="stylesheet" th:href="@{/css/fontawesome.min.css}">
+    <link rel="stylesheet" th:href="@{/css/ionicons.min.css}">
+    <link rel="stylesheet" th:href="@{/css/simple-line-icons.css}">
+    <link rel="stylesheet" th:href="@{/css/jquery-ui.min.css}">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/plugins.css}">
+    <link rel="stylesheet" th:href="@{/css/style.min.css}">
+
+    <!-- Use the minified version files listed below for better performance and remove the files listed above -->
+
+    <!--**************************** 
+         Minified  css 
+    ****************************-->
+
+    <!--*********************************************** 
+       vendor min css,plugins min css,style min css
+     ***********************************************-->
+    <!-- <link rel="stylesheet" href="assets/css/vendor/vendor.min.css" />
+    <link rel="stylesheet" href="assets/css/plugins/plugins.min.css" />
+    <link rel="stylesheet" href="assets/css/style.min.css" /> -->
+</head>
+
+<body>
+
+<!-- Admin nav Start -->
+<div th:replace="/default/admin/nav"></div>
+<!-- Admin Nav -->
+
+<!-- Product Form start -->
+
+<div class="login-register-area pt-80 pb-80">
+    <div class="container">
+        <div class="col-lg-7 col-md-12 ms-auto me-auto">
+            <form method="post" enctype="multipart/form-data" th:object="${user}" th:action="@{/admin/user/update}">
+                <div class="mb-3">
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text"  th:field="*{username}" th:errorclass="is-invalid"  class="form-control" id="username" aria-describedby="titleHelp">
+                    <div id="validationUsername" class="invalid-feedback" th:errors="*{username}">
+                        Looks good!
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password"  th:field="*{password}" th:errorclass="is-invalid"  class="form-control" id="password" aria-describedby="titleHelp">
+                    <div id="validationPassword" class="invalid-feedback" th:errors="*{password}">
+                        Looks good!
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="firstName" class="form-label">First Name</label>
+                    <input type="text"  th:field="*{firstName}" th:errorclass="is-invalid"  class="form-control" id="firstName" aria-describedby="titleHelp">
+                    <div id="validationFirstName" class="invalid-feedback" th:errors="*{firstName}">
+                        Looks good!
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="lastName" class="form-label">Last Name</label>
+                    <input type="text"  th:field="*{lastName}" th:errorclass="is-invalid"  class="form-control" id="lastName" aria-describedby="titleHelp">
+                    <div id="validationLastName" class="invalid-feedback" th:errors="*{lastName}">
+                        Looks good!
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email"  th:field="*{email}" th:errorclass="is-invalid"  class="form-control" id="email" aria-describedby="titleHelp">
+                    <div id="validationEmail" class="invalid-feedback" th:errors="*{email}">
+                        Looks good!
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="dob" class="form-label">DOB</label>
+                    <input type="date"  th:field="*{dob}" th:errorclass="is-invalid"  class="form-control" id="dob" aria-describedby="titleHelp">
+                    <div id="validationDob" class="invalid-feedback" th:errors="*{dob}">
+                        Looks good!
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="type" class="form-label">Type</label>
+                    <select th:field="*{type}" id="type" class="form-select" aria-label="type" >
+                        <option value="1">Normal</option>
+                        <option value="0">Adminstrator</option>
+                    </select>
+                    <div id="validationType" class="invalid-feedback" th:errors="*{type}">
+                        Looks good!
+                    </div>
+                </div>
+                <input type="hidden" th:field="*{id}">
+                <div class="button-box">
+                    <button type="submit" class="btn btn-dark btn--md">
+                        <span>Save User</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Product Form end -->
+
+<!-- footer strat -->
+<footer th:replace="default/admin/footer">
+</footer>
+<!-- footer end -->
+
+
+<!-- search-box and overlay start -->
+<div class="overlay">
+    <div class="scale"></div>
+    <form class="search-box" action="#">
+        <input type="text" name="search" placeholder="Search products...">
+        <button id="close" type="submit">
+            <i class="ion-ios-search-strong"></i>
+        </button>
+    </form>
+    <button class="close"><i class="ion-android-close"></i></button>
+</div>
+<!-- search-box and overlay end -->
+
+
+<!--***********************
+    all js files
+ ***********************-->
+
+<!--******************************************************
+    jquery,modernizr ,poppe,bootstrap,plugins and main js
+ ******************************************************-->
+
+<script th:src="@{/js/jquery-3.6.0.min.js}"></script>
+<script th:src="@{/js/jquery-migrate-3.3.2.min.js}"></script>
+<script th:src="@{/js/modernizr-3.7.1.min.js}"></script>
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/js/plugins.js}"></script>
+<script th:src="@{/js/ajax-contact.js}"></script>
+<script th:src="@{/js/main.js}"></script>
+
+<!-- Use the minified version files listed below for better performance and remove the files listed above -->
+
+<!--***************************
+      Minified  js
+ ***************************-->
+
+<!--***********************************
+     vendor,plugins and main js
+  ***********************************-->
+
+<!-- <script src="assets/js/vendor/vendor.min.js"></script>
+<script src="assets/js/plugins/plugins.min.js"></script>
+<script src="assets/js/main.js"></script> -->
+
+</body>
+
+</html>

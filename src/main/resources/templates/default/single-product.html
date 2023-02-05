@@ -85,25 +85,25 @@
           <div class="product-sync-init mb-20">
             <div class="single-product">
               <div class="product-thumb">
-                <img th:src="${thisProduct.imageUrl}" alt="product-thumb">
+                <img th:src="@{/product/images/{imageName}(imageName=${thisProduct.imageName1})}" alt="product-thumb">
               </div>
             </div>
             <!-- single-product end -->
             <div class="single-product">
               <div class="product-thumb">
-                <img th:src="${thisProduct.imageUrl1}" alt="product-thumb">
+                <img th:src="@{/product/images/{imageName}(imageName=${thisProduct.imageName2})}"  alt="product-thumb">
               </div>
             </div>
             <!-- single-product end -->
             <div class="single-product">
               <div class="product-thumb">
-                <img th:src="${thisProduct.imageUrl2}" alt="product-thumb">
+                <img th:src="@{/product/images/{imageName}(imageName=${thisProduct.imageName3})}"  alt="product-thumb">
               </div>
             </div>
             <!-- single-product end -->
             <div class="single-product">
               <div class="product-thumb">
-                <img th:src="${thisProduct.imageUrl3}" alt="product-thumb">
+                <img th:src="@{/product/images/{imageName}(imageName=${thisProduct.imageName4})}"  alt="product-thumb">
               </div>
             </div>
             <!-- single-product end -->
@@ -113,26 +113,28 @@
           <div class="single-product">
             <div class="product-thumb">
               <a href="javascript:void(0)">
-                <img th:src="${thisProduct.imageUrl}" alt="product-thumb"></a>
+                <img th:src="@{/product/images/{imageName}(imageName=${thisProduct.imageName1})}"  alt="product-thumb"></a>
             </div>
           </div>
           <!-- single-product end -->
           <div class="single-product">
             <div class="product-thumb">
               <a href="javascript:void(0)">
-                <img th:src="${thisProduct.imageUrl1}" alt="product-thumb"></a>
+                <img th:src="@{/product/images/{imageName}(imageName=${thisProduct.imageName2})}"  alt="product-thumb"></a>
             </div>
           </div>
           <!-- single-product end -->
           <div class="single-product">
             <div class="product-thumb">
-              <a href="javascript:void(0)"><img th:src="${thisProduct.imageUrl2}" alt="product-thumb"></a>
+              <a href="javascript:void(0)">
+                <img th:src="@{/product/images/{imageName}(imageName=${thisProduct.imageName3})}"  alt="product-thumb"></a>
             </div>
           </div>
           <!-- single-product end -->
           <div class="single-product">
             <div class="product-thumb">
-              <a href="javascript:void(0)"><img th:src="${thisProduct.imageUrl3}" alt="product-thumb"></a>
+              <a href="javascript:void(0)">
+                <img th:src="@{/product/images/{imageName}(imageName=${thisProduct.imageName4})}" alt="product-thumb"></a>
             </div>
           </div>
           <!-- single-product end -->

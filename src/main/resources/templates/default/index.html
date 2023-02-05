@@ -236,7 +236,7 @@
                       <div class="product-thumbnail position-relative">
                         <span class="badge badge-danger top-right">New</span>
                         <a th:href="@{/product/{id}(id=${product.id})}">
-                          <img class="first-img" th:src="${product.imageUrl}" alt="thumbnail">
+                          <img class="first-img" th:src="@{/product/images/{imageName}(imageName=${product.imageName1})}" alt="thumbnail">
                         </a>
                         <!-- product links -->
                         <ul class="actions d-flex justify-content-center">
@@ -262,7 +262,7 @@
                       <div class="media-body">
                         <div class="product-desc">
                           <h3 class="title">
-                            <a href="shop-grid-4-column.html" th:text="${product.title}">All Natural Makeup Beauty Cosmetics</a>
+                            <a th:href="@{/product/{id}(id=${product.id})}" th:text="${product.title}">All Natural Makeup Beauty Cosmetics</a>
                           </h3>
                           <div class="star-rating">
                             <span class="ion-ios-star"></span>

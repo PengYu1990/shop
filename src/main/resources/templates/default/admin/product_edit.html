@@ -43,16 +43,18 @@
 
 <body>
 
-<!-- Admin nav Start -->
-<div th:replace="/default/admin/nav"></div>
-<!-- Admin Nav -->
+<!-- Admin Nav Start -->
+<div th:replace="default/admin/nav"></div>
+<!-- Admin Nav End -->
+
 
 <!-- Product Form start -->
 
 <div class="login-register-area pt-80 pb-80">
     <div class="container">
         <div class="col-lg-7 col-md-12 ms-auto me-auto">
-            <form method="post" enctype="multipart/form-data" th:object="${product}" th:action="@{/admin/product/add}">
+            <form method="post" enctype="multipart/form-data" th:object="${product}" th:action="@{/admin/product/update}">
+                <input type="hidden" th:field="${product.id}">
                 <div class="mb-3">
                     <label for="title" class="form-label">Title</label>
                     <input type="text"  th:field="*{title}" th:errorclass="is-invalid"  class="form-control" id="title" aria-describedby="titleHelp">
@@ -132,18 +134,22 @@
                 </div>
                 <div class="mb-3">
                     <label for="image1"  class="form-label">Main Image</label>
+                    <img width="80px" th:src="@{/product/images/{imageName}(imageName=${product.imageName1})}" />
                     <input class="form-control" id="image1" type="file" name="image1">
                 </div>
                 <div class="mb-3">
                     <label for="image2"  class="form-label">Image 2</label>
+                    <img width="80px" th:src="@{/product/images/{imageName}(imageName=${product.imageName2})}" />
                     <input class="form-control" id="image2" type="file" name="image2">
                 </div>
                 <div class="mb-3">
                     <label for="image3"  class="form-label">Image 3</label>
+                    <img width="80px" th:src="@{/product/images/{imageName}(imageName=${product.imageName3})}" />
                     <input class="form-control" id="image3" type="file" name="image3">
                 </div>
                 <div class="mb-3">
                     <label for="image4"  class="form-label">Image 4</label>
+                    <img width="80px" th:src="@{/product/images/{imageName}(imageName=${product.imageName4})}" />
                     <input class="form-control" id="image4" type="file" name="image4">
                 </div>
                 <div class="button-box">
@@ -157,6 +163,7 @@
 </div>
 
 <!-- Product Form end -->
+
 
 <!-- footer strat -->
 <footer th:replace="default/admin/footer">
