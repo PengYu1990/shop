@@ -9,6 +9,9 @@ import com.hugo.shop.data.FileStorageRepository;
 import com.hugo.shop.web.dto.ProductDTO;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -148,15 +151,23 @@ public class AdminProductController {
 
     @GetMapping("/delete/{id}")
     public String deleteProduct(@PathVariable("id") Long id, Model model) {
-        productService.deleteProduct(id);
+
+        Product product = productService.getProductById(id).get();
+        if(product != null) {
+            fileStorageRepository.delete(product.getImageName1());
+            fileStorageRepository.delete(product.getImageName2());
+            fileStorageRepository.delete(product.getImageName3());
+            fileStorageRepository.delete(product.getImageName4());
+            productService.deleteProduct(id);
+        }
         return "redirect:/admin/product/list";
     }
 
 
     @GetMapping("/list")
-    public String listProduct(Model model) {
-        List<Product> productList = productService.getAllProduct();
-        model.addAttribute("productList", productList);
+    public String listProduct(Model model, @PageableDefault(size = 10) Pageable pageable) {
+        Page<Product> productPage = productService.getAllProduct(pageable);
+        model.addAttribute("productPage", productPage);
         return "default/admin/product_list";
 
     }

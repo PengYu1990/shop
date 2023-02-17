@@ -4,6 +4,9 @@ package com.hugo.shop.web.controller;
 import com.hugo.shop.biz.model.Product;
 import com.hugo.shop.biz.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,9 +28,11 @@ public class IndexController {
     }
 
     @GetMapping
-    public String index(Model model){
-        List<Product> latestProducts = productService.getAllProduct();
+    public String index(Model model, @PageableDefault(size=8) Pageable pageable){
+        Page<Product> latestProducts = productService.getAllProduct(pageable);
+        List<Product> productsOnSale = productService.getOnSaleProduct();
         model.addAttribute("latestProducts",latestProducts);
+        model.addAttribute("productsOnSale",productsOnSale);
         return "default/index";
     }
 

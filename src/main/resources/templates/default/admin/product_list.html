@@ -67,7 +67,7 @@
                 </tr>
                 </tbody>
                 <tbody>
-                <tr th:each="product : ${productList}">
+                <tr th:each="product : ${productPage}">
                     <td th:text="${product.id}"></td>
                     <td><a th:text="${product.title}" th:href="@{/product/{id}(id=${product.id})}" target="_blank"></a>
                     </td>
@@ -86,6 +86,17 @@
                 </tr>
                 </tbody>
             </table>
+            <nav aria-label="...">
+                <ul class="pagination justify-content-end" >
+                    <li class="page-item" th:classappend="${productPage.first} ? 'disabled'">
+                        <a th:href="@{/admin/product/list(page=${productPage.number - 1})}"  class="page-link icon-arrow-left"></a>
+                    </li>
+                    <li class="page-item" th:each="page : ${#numbers.sequence(0, productPage.totalPages-1)}" th:classappend="${page} == ${productPage.number} ? 'active' "><a class="page-link" th:href="@{/admin/product/list(page=${page})}" th:text="${page+1}">1</a></li>
+                    <li class="page-item" th:classappend="${productPage.last} ? 'disabled'">
+                        <a class="page-link icon-arrow-right" th:href="@{/admin/product/list(page=${productPage.number + 1})}"></a>
+                    </li>
+                </ul>
+            </nav>
             <a th:href="@{/admin/product/add}"><button type="button" class="btn btn-primary">ADD</button></a>
         </div>
     </div>

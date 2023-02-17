@@ -3,6 +3,9 @@ package com.hugo.shop.web.controller;
 import com.hugo.shop.biz.model.Product;
 import com.hugo.shop.biz.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,7 +29,7 @@ public class ProductController {
     }
 
     @GetMapping("/{id}")
-    public String product(@PathVariable("id") Long id, Model model) {
+    public String view(@PathVariable("id") Long id, Model model) {
         Optional<Product> optionalProduct = productService.getProductById(id);
         try {
             Product product = optionalProduct.get();
@@ -38,6 +41,13 @@ public class ProductController {
         }
 
         return "default/single-product";
+    }
+
+    @GetMapping
+    public String list(Model model, @PageableDefault(size = 12) Pageable pageable) {
+        Page<Product> productPage = productService.getAllProduct(pageable);
+        model.addAttribute("productPage", productPage);
+        return "default/product_list";
     }
 
 }

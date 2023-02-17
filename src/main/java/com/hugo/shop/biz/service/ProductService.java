@@ -7,6 +7,9 @@ import com.hugo.shop.utils.JpaUtil;
 import com.hugo.shop.web.dto.ProductDTO;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -35,8 +38,22 @@ public class ProductService {
         return product;
     }
 
-    public List<Product> getAllProduct() {
-        return (List<Product>) productRepository.findAll();
+//    public List<Product> getAllProduct() {
+//        return (List<Product>) productRepository.findAll();
+//    }
+
+    public Page<Product> getAllProduct(Pageable pageable) {
+        Page<Product> productsPage = productRepository.findAll(pageable);
+        if(productsPage == null) {
+            productsPage = Page.empty();
+        }
+        return productsPage;
+    }
+
+    public List<Product> getOnSaleProduct() {
+        List<Product> products = productRepository.findTop8ByDiscountLessThanOrderByIdAsc(10f);
+
+        return products;
     }
 
     public Optional<Product> getProductById(Long id) {

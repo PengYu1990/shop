@@ -5,6 +5,9 @@ import com.hugo.shop.biz.service.UserService;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -21,11 +24,11 @@ public class AdminUserController {
 
     @GetMapping
     public String index(HttpSession session) {
-        if(session.getAttribute("user") != null) {
-            return "redirect:/admin/product/list";
-        } else {
-            return "redirect:/admin/login";
-        }
+//        if(session.getAttribute("admin_user") != null) {
+        return "redirect:/admin/product/list";
+//        } else {
+//            return "redirect:/admin/login";
+//        }
 
     }
 
@@ -46,24 +49,25 @@ public class AdminUserController {
 
         User user = userService.login(username, password);
         if(user != null && user.getType() == 0) {
-            session.setAttribute("user", user);
+            session.setAttribute("admin_user", user);
+            return "redirect:/admin/product/list";
+        } else {
+            return "/default/admin/login";
         }
 
-        return "redirect:/admin/product/list";
+
     }
 
     @GetMapping("/logout")
     public String logout(HttpSession session) {
-        if(session.getAttribute("user") != null) {
-            session.removeAttribute("user");
-        }
+        session.removeAttribute("admin_user");
         return "redirect:/admin/login";
     }
 
     @GetMapping("/user/list")
-    public String userList(Model model) {
-        List<User>  users = userService.findAll();
-        model.addAttribute("users",users);
+    public String list(Model model, @PageableDefault(size = 10) Pageable pageable) {
+        Page<User> userPages = userService.findAll(pageable);
+        model.addAttribute("users", userPages);
         return "default/admin/user_list";
     }
 

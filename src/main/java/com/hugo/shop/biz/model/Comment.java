@@ -2,12 +2,14 @@ package com.hugo.shop.biz.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.DynamicUpdate;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
 @Entity
+@DynamicUpdate
 public class Comment {
 
     @Id

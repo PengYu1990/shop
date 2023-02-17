@@ -9,11 +9,13 @@ import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.DynamicUpdate;
 
 import java.time.LocalDate;
 
 @Data
 @Entity
+@DynamicUpdate
 @AllArgsConstructor
 @NoArgsConstructor
 public class User {
@@ -42,5 +44,7 @@ public class User {
     // 0 : Adminstrator
     // 1 : Common User
     private int type = 1;
+
+    private String address;
 
 }

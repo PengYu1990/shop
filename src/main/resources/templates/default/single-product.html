@@ -194,10 +194,12 @@
                 </div>
               </div>
               <div>
-                <button class="btn btn-dark btn--xl mt-5 mt-sm-0">
+                <a th:href="@{/trolley/add/{pid}(pid=${thisProduct.id})}">
+                  <button class="btn btn-dark btn--xl mt-5 mt-sm-0">
                   <span class="me-2"><i class="ion-android-add"></i></span>
                   Add to cart
                 </button>
+                </a>
               </div>
             </div>
             <div class="addto-whish-list">

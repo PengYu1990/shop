@@ -84,6 +84,17 @@
                 </tr>
                 </tbody>
             </table>
+            <nav aria-label="...">
+                <ul class="pagination justify-content-end" >
+                    <li class="page-item" th:classappend="${users.first} ? 'disabled'">
+                        <a th:href="@{/admin/user/list(page=${users.number - 1})}"  class="page-link icon-arrow-left"></a>
+                    </li>
+                    <li class="page-item" th:each="page : ${#numbers.sequence(0, users.totalPages-1)}" th:classappend="${page} == ${users.number} ? 'active' "><a class="page-link" th:href="@{/admin/user/list(page=${page})}" th:text="${page+1}">1</a></li>
+                    <li class="page-item" th:classappend="${users.last} ? 'disabled'">
+                        <a class="page-link icon-arrow-right" th:href="@{/admin/user/list(page=${users.number + 1})}"></a>
+                    </li>
+                </ul>
+            </nav>
             <a th:href="@{/admin/user/add}"><button type="button" class="btn btn-primary">ADD</button></a>
         </div>
     </div>

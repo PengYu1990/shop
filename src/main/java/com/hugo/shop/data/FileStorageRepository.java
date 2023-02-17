@@ -30,6 +30,9 @@ public class FileStorageRepository {
     }
 
     public void delete(String fileName) {
+        if(fileName == null){
+            return;
+        }
         Path path = Path.of(storagePath).resolve(fileName).normalize();
         try {
             Files.delete(path);

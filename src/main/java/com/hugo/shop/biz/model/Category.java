@@ -8,9 +8,11 @@ import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
+import org.hibernate.annotations.DynamicUpdate;
 
 @Entity
 @Data
+@DynamicUpdate
 public class Category {
 
     @Id

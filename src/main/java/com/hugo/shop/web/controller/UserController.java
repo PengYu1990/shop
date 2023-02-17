@@ -2,6 +2,7 @@ package com.hugo.shop.web.controller;
 
 import com.hugo.shop.biz.model.User;
 import com.hugo.shop.biz.service.UserService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,14 +32,14 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public String login(String username, String password) {
+    public String login(String username, String password, HttpSession session, Model model) {
         User loginUser = userService.login(username, password);
         if(loginUser != null ) {
-            System.out.printf("登录成功"+loginUser.toString());
-        } else {
-            System.out.printf("登录失败");
+            session.setAttribute("user", loginUser);
+            return "redirect:/";
         }
-        return "redirect:/user/login";
+        return "/default/login";
+
     }
 
     @PostMapping("/register")
@@ -52,5 +53,11 @@ public class UserController {
 //        List<User> users = userService.findAll();
 //        model.addAttribute("users", users);
         return "default/login";
+    }
+
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+        session.removeAttribute("user");
+        return "redirect:/";
     }
 }

@@ -5,6 +5,8 @@ import com.hugo.shop.data.UserRepository;
 import com.hugo.shop.utils.JpaUtil;
 import org.apache.tomcat.util.security.MD5Encoder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 
@@ -23,6 +25,14 @@ public class UserService {
 
     public List<User> findAll() {
         return (List<User>) userRepository.findAll();
+    }
+
+    public Page<User> findAll(Pageable pageable) {
+        Page<User> userPage =  userRepository.findAll(pageable);
+        if(userPage == null) {
+            userPage = Page.empty();
+        }
+        return userPage;
     }
 
     public User login(String username, String password) {
