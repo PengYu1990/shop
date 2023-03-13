@@ -25,6 +25,8 @@ public class TrolleyItem {
     private float price;
     private String imageName;
 
+    private float discount;
+
     @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     @JoinColumn(name = "trolley_id")
     private Trolley trolley;

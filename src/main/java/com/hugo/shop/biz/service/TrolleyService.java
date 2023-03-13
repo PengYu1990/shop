@@ -43,6 +43,7 @@ public class TrolleyService {
         Product product = productService.getProductById(pid).get();
         TrolleyItem trolleyItem = trolleyItemService.add(product, trolley);
         trolley.addItem(trolleyItem);
+        trolley.setDiscount(product.getDiscount());
 //        trolley.addDiscount(trolleyItem.getDi);
         trolleyRespository.save(trolley);
     }

@@ -6,6 +6,7 @@ import org.hibernate.annotations.DynamicUpdate;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 
 
 @Entity
@@ -18,12 +19,12 @@ public class Orders {
     private Long id;
 //    private Long uid;
 
-    // = id + uid + ctime
+    // UUID
     private String code;
 
     // 0 : Ordered; 1 : paid; 2 : posted; 3 : delivered; 4 : applied refund; 5 : refunded
     private int status;
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Product> products;
     private LocalDateTime ctime;
     private float price;

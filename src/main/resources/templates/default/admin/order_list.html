@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="">
+    <title>Order Management</title>
+    <!-- Favicon -->
+
+
+    <!--********************************** 
+        all css files 
+    *************************************-->
+
+    <!--*************************************************** 
+       fontawesome,bootstrap,plugins and main style css
+     ***************************************************-->
+    <!-- cdn links -->
+
+    <link rel="stylesheet" th:href="@{/css/fontawesome.min.css}">
+    <link rel="stylesheet" th:href="@{/css/ionicons.min.css}">
+    <link rel="stylesheet" th:href="@{/css/simple-line-icons.css}">
+    <link rel="stylesheet" th:href="@{/css/jquery-ui.min.css}">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/plugins.css}">
+    <link rel="stylesheet" th:href="@{/css/style.min.css}">
+
+    <!-- Use the minified version files listed below for better performance and remove the files listed above -->
+
+    <!--**************************** 
+         Minified  css 
+    ****************************-->
+
+    <!--*********************************************** 
+       vendor min css,plugins min css,style min css
+     ***********************************************-->
+    <!-- <link rel="stylesheet" href="assets/css/vendor/vendor.min.css" />
+    <link rel="stylesheet" href="assets/css/plugins/plugins.min.css" />
+    <link rel="stylesheet" href="assets/css/style.min.css" /> -->
+</head>
+
+<body>
+<!-- Nav Start -->
+<nav th:replace="default/admin/nav"></nav>
+<!-- Nav End -->
+
+<!-- Product List start -->
+
+<div class="login-register-area pt-60 pb-60">
+    <div class="container">
+        <div class="col-lg-11 col-md-12 ms-auto me-auto">
+            <table class="table">
+                <tbody>
+                <tr>
+                    <th scope="col">Code</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Discount</th>
+                    <th scope="col">status</th>
+                    <th scope="col">Create Time</th>
+                </tr>
+                </tbody>
+                <tbody>
+                <tr th:each="order : ${orders}">
+                    <td th:text="${order.id}"></td>
+                   <!-- <td><a th:text="${order.title}" th:href="@{/product/{id}(id=${product.id})}" target="_blank"></a>
+                    </td> -->
+                    <td th:text="${order.price}"></td>
+                    <td th:text="${order.discount}"></td>
+                    <td th:text="${order.status}"></td>
+                    <td th:text="${order.ctime}"></td>
+                    <td><a th:href="@{/admin/order/delete/{id}(id=${order.id})}" />"delete</a></td>
+                    <td colspan="5">
+                    <!--
+                        <tr th:each="product : ${order.products}">
+                            <td th:text="${product.title}"></td>
+                            <td th:text="${product.price}"></td>
+                        </tr>
+                        -->
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <nav aria-label="...">
+                <ul class="pagination justify-content-end" >
+                    <li class="page-item" th:classappend="${orders.first} ? 'disabled'">
+                        <a th:href="@{/admin/order/list(page=${orders.number - 1})}"  class="page-link icon-arrow-left"></a>
+                    </li>
+                    <li class="page-item" th:each="page : ${#numbers.sequence(0, orders.totalPages-1)}" th:classappend="${page} == ${orders.number} ? 'active' "><a class="page-link" th:href="@{/admin/order/list(page=${page})}" th:text="${page+1}">1</a></li>
+                    <li class="page-item" th:classappend="${orders.last} ? 'disabled'">
+                        <a class="page-link icon-arrow-right" th:href="@{/admin/order/list(page=${orders.number + 1})}"></a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+<!-- Product List end -->
+
+
+<!-- footer strat -->
+<footer th:replace="default/admin/footer">
+</footer>
+<!-- footer end -->
+
+
+<!-- search-box and overlay start -->
+<div class="overlay">
+    <div class="scale"></div>
+    <form class="search-box" action="#">
+        <input type="text" name="search" placeholder="Search products...">
+        <button id="close" type="submit">
+            <i class="ion-ios-search-strong"></i>
+        </button>
+    </form>
+    <button class="close"><i class="ion-android-close"></i></button>
+</div>
+<!-- search-box and overlay end -->
+
+
+<!--***********************
+    all js files
+ ***********************-->
+
+<!--******************************************************
+    jquery,modernizr ,poppe,bootstrap,plugins and main js
+ ******************************************************-->
+
+<script th:src="@{/js/jquery-3.6.0.min.js}"></script>
+<script th:src="@{/js/jquery-migrate-3.3.2.min.js}"></script>
+<script th:src="@{/js/modernizr-3.7.1.min.js}"></script>
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/js/plugins.js}"></script>
+<script th:src="@{/js/ajax-contact.js}"></script>
+<script th:src="@{/js/main.js}"></script>
+
+<!-- Use the minified version files listed below for better performance and remove the files listed above -->
+
+<!--***************************
+      Minified  js
+ ***************************-->
+
+<!--***********************************
+     vendor,plugins and main js
+  ***********************************-->
+
+<!-- <script src="assets/js/vendor/vendor.min.js"></script>
+<script src="assets/js/plugins/plugins.min.js"></script>
+<script src="assets/js/main.js"></script> -->
+
+</body>
+
+</html>

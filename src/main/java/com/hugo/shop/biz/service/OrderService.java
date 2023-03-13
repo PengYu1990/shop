@@ -9,10 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class OrderService {
@@ -36,11 +38,16 @@ public class OrderService {
         order.setDiscount(trolley.getDiscount());
         order.setStatus(0);
         order.setPostAddress(postAddress);
+        order.setCode(UUID.randomUUID().toString());
         List<TrolleyItem> trolleyItems = trolley.getTrolleyItems();
         List<Long> pids = new ArrayList<Long>();
+        Float discountSum = 10f;
         for(TrolleyItem trolleyItem : trolleyItems) {
             pids.add(trolleyItem.getPid());
+            discountSum += trolleyItem.getDiscount();
         }
+        Float avgDiscount = discountSum / trolleyItems.size();
+        order.setDiscount(avgDiscount);
         List<Product> products = productRepository.findAllById(pids);
         order.setProducts(products);
 
@@ -58,5 +65,18 @@ public class OrderService {
             page = Page.empty();
         }
         return page;
+    }
+
+    public Page<Orders> findAll(Pageable pageable) {
+        Page<Orders> orders = orderRepository.findAll(pageable);
+        if(orders == null){
+            orders = Page.empty();
+        }
+       return orders;
+    }
+
+    public void delete(Long id) {
+        Orders order = orderRepository.findById(id).get();
+        orderRepository.delete(order);
     }
 }
